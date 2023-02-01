@@ -1,1 +1,16 @@
-
+tdarr:
+    image: ghcr.io/haveagitgat/tdarr:latest
+    container_name: tdarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - UMASK_SET=002 #optional
+    volumes:
+      - ./volumes/tdarr/configs:/config
+      - ./media/movies:/movies
+      - ./media/tvshows:/tv
+      - ./transcode_cache:/temp
+    ports:
+      - 8265:8265
+    restart: unless-stopped
